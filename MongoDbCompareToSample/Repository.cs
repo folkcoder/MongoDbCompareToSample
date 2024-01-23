@@ -19,10 +19,10 @@ public class Repository<TModel, TId>
         _collection = database.GetCollection<TModel>(nameof(TModel));
     }
 
-    public async Task<IEnumerable<TModel>> GetAfter(TId after)
+    public async Task<IEnumerable<TModel>> GetAfter(TId cursor)
     {
         return await _collection.AsQueryable()
-            .Where(x => x.Id.CompareTo(after) > 0)
+            .Where(x => x.Id.CompareTo(cursor) > 0)
             .ToListAsync();
     }
 }
